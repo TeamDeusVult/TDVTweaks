@@ -52,7 +52,7 @@ minecraft {
             property 'mixin.env.remapRefMap', 'true'
             property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
             mods {
-                templatemod {
+                tdv_tweaks {
                     source sourceSets.main
                 }
             }
@@ -65,7 +65,7 @@ minecraft {
             property 'mixin.env.remapRefMap', 'true'
             property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
             mods {
-                templatemod {
+                tdv_tweaks {
                     source sourceSets.main
                 }
             }
@@ -80,7 +80,7 @@ minecraft {
             property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
             args '--mod', String.valueOf(mod_id), '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources')
             mods {
-                templatemod {
+                tdv_tweaks {
                     source sourceSets.main
                 }
             }
@@ -125,19 +125,25 @@ dependencies {
 
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
 
-    def registrate = "com.tterrag.registrate:Registrate:MC1.16.5-${registrate_version}"
-    implementation fg.deobf(registrate)
-    shade registrate
+    //def registrate = "com.tterrag.registrate:Registrate:MC1.16.5-${registrate_version}"
+    //implementation fg.deobf(registrate)
+    //shade registrate
 
-    runtimeOnly fg.deobf("curse.maven:jei-238222:3438494")
+    implementation fg.deobf("curse.maven:jei-238222:3590083")
+
+    runtimeOnly fg.deobf("curse.maven:blur-268324:3271923")
+    runtimeOnly fg.deobf("curse.maven:magnesium-532724:3526076")
+    runtimeOnly fg.deobf("curse.maven:magnesiumextras-558905:3592543")
+    runtimeOnly fg.deobf("curse.maven:dynlights-551736:3574974")
+
+    runtimeOnly fg.deobf("curse.maven:configured-457570:3546348")
     runtimeOnly fg.deobf("curse.maven:jer-240630:3066754")
     runtimeOnly fg.deobf("curse.maven:hwyla-253449:3033593")
 
-    annotationProcessor 'org.spongepowered:mixin:0.8.2:processor'
+    annotationProcessor 'org.spongepowered:mixin:0.8.3:processor'
 }
 
 jar {
-    classifier = 'slim'
     manifest {
         attributes([
                 "Specification-Title": "${mod_id}",
@@ -176,7 +182,7 @@ task javadocJar(type: Jar, dependsOn: javadoc) {
 }
 
 artifacts {
-    archives jar, shadowJar, sourcesJar, javadocJar
+    archives jar, shadowJar
 }
 
 publishing {
