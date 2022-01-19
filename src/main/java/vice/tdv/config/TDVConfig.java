@@ -12,14 +12,14 @@ public class TDVConfig
 {
     public static ForgeConfigSpec ConfigSpec;
 
-    public static ConfigValue<Boolean> Enabled;
+    public static ConfigValue<Boolean> WanderingTrader;
 
     static
     {
-        val builder = new ConfigBuilder("Dynamic Lights Settings");
+        val builder = new ConfigBuilder("TDV Tweaks");
 
         builder.Block("Misc", b -> {
-            Enabled = b.define("Render Fog", true);
+            WanderingTrader = b.define("Disable Wandering Trader", false);
         });
 
         ConfigSpec = builder.Save();
